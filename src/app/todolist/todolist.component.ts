@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-todolist',
@@ -7,7 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TodolistComponent implements OnInit {
 
-  constructor() { }
+  constructor(private myapi:ApiService) {
+    this.fetchData()
+   }
+
+
+fetchData=()=>{
+  this.myapi.viewTodo().subscribe(
+    (data)=>{
+      this.todoData=data
+    }
+  )
+}
 
 todoData:any={}
 
